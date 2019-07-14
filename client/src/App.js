@@ -18,6 +18,10 @@ function App() {
         >
           Learn React
         </a>
+
+        <a className="App-link" href="/auth/google" rel="noopener noreferrer">
+          Sign In with Google
+        </a>
       </header>
     </div>
   );
