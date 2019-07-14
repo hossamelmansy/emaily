@@ -1,10 +1,10 @@
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import RootReducer from '../reducers';
+import * as actions from '../actions';
 import Header from './Header';
+import Landing from './Landing';
 
 function Dashboard() {
   return <h2>Dashboard</h2>;
@@ -14,13 +14,13 @@ function SurveyNew() {
   return <h2>SurveyNew</h2>;
 }
 
-function Landing() {
-  return <h2>Landing</h2>;
-}
+class App extends React.Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
 
-function App() {
-  return (
-    <Provider store={createStore(RootReducer, applyMiddleware())}>
+  render() {
+    return (
       <div className="container">
         <BrowserRouter>
           <Header />
@@ -29,8 +29,11 @@ function App() {
           <Route path="/surveys/new" component={SurveyNew} />
         </BrowserRouter>
       </div>
-    </Provider>
-  );
+    );
+  }
 }
 
-export default App;
+export default connect(
+  null,
+  actions
+)(App);
