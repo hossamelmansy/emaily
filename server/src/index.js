@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
@@ -10,6 +11,7 @@ require('./services/passport');
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 
 const app = express();
+app.use(bodyParser.json());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -19,5 +21,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 app.listen(process.env.PORT);
