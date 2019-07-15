@@ -17,3 +17,12 @@ export function handleToken(token) {
     dispatch({ type: FETCH_USER, payload: response.data });
   };
 }
+
+export function submitSurvey(values, history) {
+  return async function(dispatch) {
+    var response = await axios.post('/api/surveys', values);
+
+    history.push('/surveys');
+    dispatch({ type: FETCH_USER, payload: response.data });
+  };
+}

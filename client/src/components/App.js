@@ -5,14 +5,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
-
-function Dashboard() {
-  return <h2>Dashboard</h2>;
-}
-
-function SurveyNew() {
-  return <h2>SurveyNew</h2>;
-}
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew';
 
 class App extends React.Component {
   componentDidMount() {
