@@ -10,6 +10,14 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const sendEmail = require('../services/sendMail');
 
 module.exports = function(app) {
+  app.get('/api/surveys', requireLogin, async function(req, res) {
+    var surveys = await Survey.find({ _user: req.user.id }).select({
+      recipients: false
+    });
+
+    res.send(surveys);
+  });
+
   app.get('/api/surveys/:surveyId/:choice', function(req, res) {
     res.send('Thanks for voting!');
   });
